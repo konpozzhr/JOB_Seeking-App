@@ -32,16 +32,13 @@ const errorMiddleware = (err, req, res, next) =>{
         success: false, 
         message: err.message, 
         
-    });
+    }), 
+    console.log(`\n${res.statusCode} : ${res.statusMessage}\n${err.message}`);
 
     
 };
 
-// console.log('Error middleware called');
-
-// module.exports = errorMiddleware;
-// module.exports = ErrorHandler();
-// export default ErrorHandler;
+console.log('Error middleware called');
 
 
 module.exports = errorMiddleware;

@@ -1,5 +1,5 @@
 const { catchAsyncError } = require('../middlewares/catchAsyncError');
-const ErrorHandler = require('./error');
+const { ErrorHandler } = require('./error');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models/userModel');
 
@@ -30,4 +30,4 @@ const isAuthorized = catchAsyncError(async (req, res, next) =>{
     next();
 })
 
-module.exports = isAuthorized;
+module.exports = { isAuthorized };

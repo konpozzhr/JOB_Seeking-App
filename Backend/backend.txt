@@ -1,2 +1,36 @@
 
-//   "type": "module",
+   {
+    "type": "module"
+   }
+
+// API request 
+
+{
+    "email" : "panha2@gmail.com",
+    "password" : "1238439348322843",
+    "role" : "Employer"
+    
+}
+
+
+{
+    "name" : "panha",
+    "email" : "panha2@gmail.com",
+    "phone" : "019323432", 
+    "role" : "Employer",
+    "password" : "1238439348322843"
+}
+
+
+Job 
+
+
+{
+    "title" : "SpringBoot",
+    "description": "web application", 
+    "category" : "Web Application dev", 
+    "country" : "USA", 
+    "city" : "USA",
+    "location" : "new york",
+    "fixSalary" : 500
+}

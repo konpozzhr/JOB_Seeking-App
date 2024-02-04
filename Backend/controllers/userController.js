@@ -2,6 +2,8 @@ const { catchAsyncError }  = require('../middlewares/catchAsyncError');
 // const ErrorHandler = require('../middlewares/error');
 const { User } = require('../models/userModel');
 const { ErrorHandler } = require('../middlewares/error');
+const { token, sendToken } = require('../utils/jwtToken');
+// const { default: isEmail } = require('validator/lib/isemail');
 
 
 
@@ -40,13 +42,67 @@ const register = catchAsyncError(async (req, res, next) =>{
         password, 
 
     });
+    
+    // res.status(200).json({
+    //     success: true, 
+    //     message: "User registerd success",
+    //     user,
+    // });
+    // console.log(`${res.statusCode} : ${res.statusMessage}\nMessage : User registered success\n${user} `);
+
+    sendToken(user, 200, res, "User register success");
+});
+
+
+const login = catchAsyncError(async (req, res, next) =>{
+    const {email, password, role} = req.body;
+    if(!email || !password || !role){
+        return next(new ErrorHandler("Please provide email, password and role", 400));
+    }
+
+    const user = await User.findOne({ email }).select("+password");
+    if(!user){
+        return next(new ErrorHandler("Invalid email or password", 400)); 
+    }
+
+    const isPasswordMatched = await user.comparePassword(password);
+    if(!isPasswordMatched){
+        return next(new ErrorHandler("Invalid email or password", 400));
+    }
+    
+    if(user.role !==  role){
+        return next(new ErrorHandler(`User with provide email and role: [${role}] is not found!`, 400)); 
+    }
+
+    sendToken(user, 200, res, "User Logged in successful");
+});
+
+const logout = catchAsyncError(async (req, res, next) =>{
+    res
+        .status(201)
+        .cookie("token", "", {
+            httpOnly: true,
+            expires: new Date(Date.now()),
+        })
+        .json({
+            success: true, 
+            message: "User logged out",
+        });
+
+    console.log('User logged out');
+        
+});
+
+const getUser = catchAsyncError( async (req, res, next) =>{
+    const user = req.user;
     res.status(200).json({
         success: true, 
-        message: "User registerd success",
+        message: "Current user",
         user,
     });
 });
 
 
-module.exports = { register };
+
+module.exports = { register, login, logout, getUser };
 // module.exports = register ;

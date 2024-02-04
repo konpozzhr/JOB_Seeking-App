@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
+
 const userSchema = new mongoose.Schema({
     name: {
         type: String, 
@@ -67,7 +68,7 @@ userSchema.methods.genJwtToken = () =>{
 
 
 const User = mongoose.model('users', userSchema);
-module.exports = User;
+module.exports = { User };
 
 
 

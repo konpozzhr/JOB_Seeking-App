@@ -5,6 +5,7 @@ class ErrorHandler extends Error{
     }
 }
 
+
 const errorMiddleware = (err, req, res, next) =>{
     err.message = err.message || "Internal server error";
     err.statusCode = err.statusCode || 500;
@@ -27,16 +28,27 @@ const errorMiddleware = (err, req, res, next) =>{
     }
 
 
-    return res.status(statusCode).json({
+    return res.status(err.statusCode).json({
         success: false, 
         message: err.message, 
+        
     });
 
     
-}
+};
 
-console.log('Error middleware called');
+// console.log('Error middleware called');
 
+// module.exports = errorMiddleware;
+// module.exports = ErrorHandler();
+// export default ErrorHandler;
 
 
 module.exports = errorMiddleware;
+module.exports.ErrorHandler = ErrorHandler;
+
+
+// call
+
+// const errorMiddleware = require('./path-to-error-middleware-file');
+// const { ErrorHandler } = require('./path-to-error-middleware-file');

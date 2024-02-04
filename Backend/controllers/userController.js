@@ -1,6 +1,8 @@
 const { catchAsyncError }  = require('../middlewares/catchAsyncError');
-const ErrorHandler = require('../middlewares/error');
+// const ErrorHandler = require('../middlewares/error');
 const { User } = require('../models/userModel');
+const { ErrorHandler } = require('../middlewares/error');
+
 
 
 /**
@@ -47,3 +49,4 @@ const register = catchAsyncError(async (req, res, next) =>{
 
 
 module.exports = { register };
+// module.exports = register ;

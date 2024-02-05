@@ -2,10 +2,6 @@ const app = require('./app');
 const cloudinary = require('cloudinary');
 const mongoose = require('./database/database');
 
-// import app from "./app.js";
-// import cloudinary from "cloudinary";
-
-
 
 cloudinary.v2.config({
     cloud_name: process.env.CLOUDINARY_CLIENT_NAME,

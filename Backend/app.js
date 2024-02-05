@@ -9,18 +9,6 @@ const appRouter = require('./routes/applicationRouter');
 const dbConnection = require('./database/database');
 const errorMiddleware = require('./middlewares/error');
 
-
-// import express from "express";
-// import dotenv from "dotenv";
-// import cors from "cors";
-// import cookieParser from "cookie-parser";
-// import fileUpload from "express-fileupload";
-// import userRouter from "./routes/userRouter.js";
-// import jobRouter from './routes/jobRouter.js';
-// import appRouter from './routes/applicationRouter.js';
-
-
-
 const app = express();
 dotenv.config({path: './config/config.env'});
 

@@ -70,6 +70,68 @@ const postJob = catchAsyncError(async (req, res, next) =>{
 });
 
 
+const getmyJobs = catchAsyncError(async (req, res, next) =>{
+    const { role } = req.user;
+    if(role === "Job Seeker"){
+        return next(new ErrorHandler("Job seeker is not allow to access this resource!", 400));
+    }
+
+    const myjobs = await Job.find( {postedBy: req.user._id} );
+    res.status(200).json({
+        success: true, 
+        myjobs,
+    });
+    console.log(`${res.statusCode} : ${res.statusMessage}\nMessage : Job posted successfully\n${myjobs} `);
+});
+
+// Update Job 
+const updateJob = catchAsyncError(async (req, res, next ) =>{
+    const { role }  = req.user;
+    if(role === "Job Seeker"){
+        return next(new ErrorHandler("Job seeker is not allow to access this resource!", 400));
+    }
+    const { id } = req.params;
+    let job = await Job.findById(id);
+    if(!job){
+        return next(new ErrorHandler("Oops, Job not found!", 400));
+    }
+    jobUpdated = await Job.findByIdAndUpdate(id, req.body, {
+        new: true, 
+        runValidators: true, 
+        useFindAndModified: false,
+    });
+
+    res.status(200).json({
+        success: true, 
+        jobUpdated, 
+        message: "Job update successfully",
+    });
+    console.log(`${res.statusCode} : ${res.statusMessage}\nMessage : Job update successfully\n${jobUpdated} `);
+});
 
 
-module.exports = { getAllJobs, postJob };
+const deleteJob = catchAsyncError(async (req, res, next) =>{
+    const { role } = req.user;
+    if(role === "Job Seeker"){
+        return next(new ErrorHandler("Job seeker is not allow to access this resource!", 400));
+    }
+    const { id } = req.params;
+    let job = await Job.findById(id);
+    if(!job){
+        return next(new ErrorHandler("Oops, Job not found!", 400));
+    }
+    const jobDel = await job.deleteOne();
+    res.status(200).json({
+        success: true, 
+        jobDel, 
+        message: "Job delete successfully",
+    });
+    console.log(`${res.statusCode} : ${res.statusMessage}\nMessage : Job update successfully\n${jobDel} `);
+})
+
+
+
+
+
+
+module.exports = { getAllJobs, postJob, getmyJobs, updateJob, deleteJob };

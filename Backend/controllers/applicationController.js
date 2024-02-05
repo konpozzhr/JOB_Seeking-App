@@ -3,6 +3,7 @@ const { Application } = require('../models/applicationModel');
 const { ErrorHandler } = require('../middlewares/error');
 const { token, sendToken } = require('../utils/jwtToken');
 const cloudinary = require('cloudinary');
+const { Job } = require('../models/jobModel')
 
 
 /**
@@ -109,7 +110,7 @@ const postApplication = catchAsyncError( async (req, res, next) =>{
         return next(new ErrorHandler("Job not found", 404));
     }
     
-    const jobDetails = await jobId.findById(jobId);
+    const jobDetails = await Job.findById(jobId);
     if(!jobDetails){
         return next(new ErrorHandler("Job not found", 404));
     }
@@ -142,9 +143,9 @@ const postApplication = catchAsyncError( async (req, res, next) =>{
         message: "Application Submit success",
         application,
     });
-    console.log(`${res.statusCode} : ${res.statusMessage}\nApplication submit success\n${applicationDeleted} `);    
+    console.log(`${res.statusCode} : ${res.statusMessage}\nApplication submit success\n${application} `);    
 
 });
 
 
-module.exports = { empGetAllApplication, jobSeekerApplication, jobSeekerDeleteApplication };
+module.exports = { empGetAllApplication, jobSeekerApplication, jobSeekerDeleteApplication , postApplication};

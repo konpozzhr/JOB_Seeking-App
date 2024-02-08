@@ -1,12 +1,12 @@
 import React from "react";
 
-const Jobs = () =>{
+const NotFound = () =>{
     return (
         <>
-            <h1>Job Page</h1>
         </>
+
     );
 }
 
 
-export default Jobs;
+export default NotFound;

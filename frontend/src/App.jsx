@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import './App.css';
 import { Context } from './main';
-import {BrowserRouter, Router, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Router, Routes, Route, Navigate} from 'react-router-dom';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import Navbar from './components/Layout/Navbar';
@@ -26,7 +26,7 @@ const App = () =>{
   useEffect(() =>{
     const fetchUser = () =>{
       try{
-        const response = axios.get("", {withCredentials: true});
+        const response = axios.get("http://localhost:3004/api/v1/user/getuser", {withCredentials: true});
         setUser(response.data.user);
         setIsAuthorized(true);
       }catch(err){
@@ -36,12 +36,11 @@ const App = () =>{
     fetchUser();
   }, [isAuthorized]);
 
-  
 
 
   return (
     <>
-      <Router>
+      <BrowserRouter>
         <Navbar />
         <Routes>
           <Route path='/login' element={<Login />}/>
@@ -55,10 +54,12 @@ const App = () =>{
           <Route path='/application/me' element={<MyApplication />}/>
           <Route path='*' element={<NotFound />}/>
         </Routes>
-      </Router>
+        <Footer />
+        <Toaster />
+      </BrowserRouter>
 
     </>
-  )
+  );
 }
 
 export default App

@@ -13,7 +13,7 @@ userRouter.post('/register', register);
 
 userRouter.post('/login', login);
 userRouter.post('/logout', isAuthorized, logout);
-userRouter.get('/current_user', getUser);
+userRouter.get('/getuser', isAuthorized, getUser);
 
 
 

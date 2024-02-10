@@ -40,9 +40,9 @@ const Register = () =>{
             setRole("");
             setIsAuthorized(true);
             console.log('User register success\n', data);
-        }catch(error){
-            toast.error(error.response.data.message);
-            console.role(err);
+        }catch(err){
+            toast.error(err.response.data.message);
+            console.error(err);
         }
     };
 

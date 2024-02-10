@@ -1,5 +1,5 @@
 const express = require('express');
-const dotenv = require('dotenv');
+const { config } = require('dotenv');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
@@ -9,8 +9,13 @@ const appRouter = require('./routes/applicationRouter');
 const dbConnection = require('./database/database');
 const errorMiddleware = require('./middlewares/error');
 
+
 const app = express();
-dotenv.config({path: './config/config.env'});
+config({path: './config/config.env'});
+
+
+// Enable CORS for all routes
+// app.use(cors());
 
 app.use(cors({                                             // Middleware cors for allow access from frontend
     origin: [process.env.FRONTEND_URL],

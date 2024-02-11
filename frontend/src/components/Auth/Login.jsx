@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../main";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -30,11 +30,13 @@ const Login = () =>{
                 }
             );
             toast.success(data.message);
-            console.log("Login successfully\n", data);
+            
             setEmail("");
             setPassword("");
             setRole("");
             setIsAuthorized(true);
+            console.log("Login successfully\n", data);
+        
         }catch(err){
             toast.error(err.response.data.message);
             console.log(err);
@@ -42,9 +44,15 @@ const Login = () =>{
 
     }
 
+    console.log("is authorized login = ", isAuthorized);
     if(isAuthorized){
-        return <Navigate to={"/"} />;
-    }
+        console.log("is authorized in if = ", isAuthorized)
+        return (
+        <> 
+            <Navigate to={"/"} />  
+        </>
+        );
+    };
 
 
     return (
@@ -103,3 +111,7 @@ const Login = () =>{
 
 
 export default Login;
+
+
+
+

@@ -29,6 +29,7 @@ const App = () =>{
         const response = axios.get("http://localhost:3004/api/v1/user/getuser", {withCredentials: true});
         setUser(response.data.user);
         setIsAuthorized(true);
+        
       }catch(err){
         setIsAuthorized(false);
       }
@@ -37,15 +38,19 @@ const App = () =>{
   }, [isAuthorized]);
 
 
+ 
+
 
   return (
     <>
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path='/login' element={<Login />}/>
+          <Route path="/login" element={<Login />}/>
           <Route path='/register' element={<Register />}/>
           <Route path='/' element={<Home />}/>
+          {/* <Route path='/' element={<Navigate to='/login' />} /> */}
+          
           <Route path='/job/getAll' element={<Jobs />}/>
           <Route path='/job/:id' element={<JobDetails />}/>
           <Route path='/job/me' element={<MyJobs />}/>

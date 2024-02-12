@@ -52,11 +52,9 @@ const Login = () =>{
     console.log("is authorized login = ", isAuthorized);
     if(isAuthorized){
         console.log("is authorized in if = ", isAuthorized)
-        
         return (
         <> 
-            <Navigate to={"/"} />  
-            
+            <Navigate to={"/"} />   
         </>
         );
     };

@@ -7,6 +7,7 @@ import HeroSection from "./HeroSection";
 
 import PopularCategories from "./PopularCategories";
 import PopularCompanies from "./PopularCompanies";
+import HowItWork from "./HowItWork";
 
 
 const Home = () =>{
@@ -22,7 +23,12 @@ const Home = () =>{
 
     return (
         <>
-            <h1>Home Page</h1>
+            {/* <h1>Home Page</h1> */}
+            <section className="homePage page">
+                <HeroSection />
+                <HowItWork />
+                <PopularCategories />
+            </section>
 
         </>
 

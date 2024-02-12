@@ -24,9 +24,9 @@ const App = () =>{
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
 
   useEffect(() =>{
-    const fetchUser = () =>{
+    const fetchUser = async () =>{  
       try{
-        const response = axios.get("http://localhost:3004/api/v1/user/getuser", {withCredentials: true});
+        const response = await axios.get("http://localhost:3004/api/v1/user/getuser", {withCredentials: true});
         setUser(response.data.user);
         setIsAuthorized(true);
         
@@ -38,8 +38,6 @@ const App = () =>{
   }, [isAuthorized]);
 
 
- 
-
 
   return (
     <>
@@ -48,9 +46,7 @@ const App = () =>{
         <Routes>
           <Route path="/login" element={<Login />}/>
           <Route path='/register' element={<Register />}/>
-          <Route path='/' element={<Home />}/>
-          {/* <Route path='/' element={<Navigate to='/login' />} /> */}
-          
+          <Route path='/' element={<Home />}/>          
           <Route path='/job/getAll' element={<Jobs />}/>
           <Route path='/job/:id' element={<JobDetails />}/>
           <Route path='/job/me' element={<MyJobs />}/>

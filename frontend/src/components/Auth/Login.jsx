@@ -8,7 +8,10 @@ import { MdOutlineMail} from 'react-icons/md';
 import { FaPhoneFlip } from 'react-icons/fa6'
 import { RiLock2Fill } from "react-icons/ri";
 
+
 const Login = () =>{
+
+    
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -44,12 +47,16 @@ const Login = () =>{
 
     }
 
+    
+
     console.log("is authorized login = ", isAuthorized);
     if(isAuthorized){
         console.log("is authorized in if = ", isAuthorized)
+        
         return (
         <> 
             <Navigate to={"/"} />  
+            
         </>
         );
     };

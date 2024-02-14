@@ -16,14 +16,19 @@ const Navbar = () =>{
 
     const handleLogout = async () =>{
         try{
-            const response = await axios.get("http://localhost:3004/api/v1/user/logout", {withCredentials: true});
+            const response = await axios.post(
+                "http://localhost:3004/api/v1/user/logout", 
+                {},
+                {withCredentials: true},
+            );
             toast.success(response.data.message);
             setIsAuthorized(false);
             navigateTo("/login");
-            // <Navigate to={"/login"} />  
+            console.log("Logout Successfully");
 
         }catch(err){
             toast.error(err.response.message);
+            console.log("error occure", err)
             setIsAuthorized(true);
         }
     }

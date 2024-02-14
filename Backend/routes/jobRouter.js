@@ -5,7 +5,8 @@ const {
     postJob, 
     getmyJobs, 
     updateJob, 
-    deleteJob 
+    deleteJob,
+    getSingleJob
     } = require('../controllers/jobController');
 
 const { isAuthorized } = require('../middlewares/auth');
@@ -15,11 +16,12 @@ jobRouter.get('/', (req, res) =>{
 });
 
 
-jobRouter.get('/getAll', getAllJobs);
+jobRouter.get('/getAll', isAuthorized ,getAllJobs);
 jobRouter.post('/post', isAuthorized ,postJob);
 jobRouter.get('/myjob', isAuthorized, getmyJobs);
 jobRouter.put('/updateJob/:id', isAuthorized, updateJob);
 jobRouter.delete('/deleteJob/:id', isAuthorized, deleteJob);
+jobRouter.get('/details/:id', getSingleJob)
 
 
 

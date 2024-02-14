@@ -14,11 +14,8 @@ const Home = () =>{
 
     const { isAuthorized } = useContext(Context);
     
-    console.log("is authorized in home = " , isAuthorized);
     if (!isAuthorized) {
-        // return console.log("login failed");
         return <Navigate to={'/login'} />
-        
     }
 
     return (
@@ -28,6 +25,7 @@ const Home = () =>{
                 <HeroSection />
                 <HowItWork />
                 <PopularCategories />
+                <PopularCompanies />
             </section>
 
         </>

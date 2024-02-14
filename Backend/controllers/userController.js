@@ -4,6 +4,7 @@ const { User } = require('../models/userModel');
 const { ErrorHandler } = require('../middlewares/error');
 const { token, sendToken } = require('../utils/jwtToken');
 // const { default: isEmail } = require('validator/lib/isemail');
+const bcrypt = require('bcrypt');
 
 
 
@@ -59,7 +60,6 @@ const login = catchAsyncError(async (req, res, next) =>{
     if(!email || !password || !role){
         return next(new ErrorHandler("Please provide email, password and role", 400));
     }
-
     const user = await User.findOne({ email }).select("+password");
     if(!user){
         return next(new ErrorHandler("Invalid email or password", 400)); 
@@ -69,13 +69,12 @@ const login = catchAsyncError(async (req, res, next) =>{
     if(!isPasswordMatched){
         return next(new ErrorHandler("Invalid email or password", 400));
     }
-    
     if(user.role !==  role){
         return next(new ErrorHandler(`User with provide email and role: [${role}] is not found!`, 400)); 
     }
-
     sendToken(user, 200, res, "User Logged in successful");
 });
+
 
 const logout = catchAsyncError(async (req, res, next) =>{
     res
@@ -88,10 +87,10 @@ const logout = catchAsyncError(async (req, res, next) =>{
             success: true, 
             message: "User logged out",
         });
-
     console.log('User logged out');
         
 });
+
 
 const getUser = catchAsyncError(  (req, res, next) =>{
     const user = req.user;
@@ -104,5 +103,30 @@ const getUser = catchAsyncError(  (req, res, next) =>{
 
 
 
-module.exports = { register, login, logout, getUser };
+const resetPassword = catchAsyncError( async (req, res, next) =>{
+    const { role, email , newPassword } = req.body
+
+    if(!email || !role){
+        return next(new ErrorHandler("Invalid email address or password input"));
+    }
+    const user = await User.findOne({ role, email });
+    if(!user){
+        return next(new ErrorHandler("Invalid email or user doesn't exist"));
+    }
+    const hashPassword = await bcrypt.hash(newPassword, 10);
+    await User.findOneAndUpdate(user._id, {password: hashPassword});
+
+    // sendToken(user, 200, res, "Password reset successfully"); 
+    res.status(200).json(
+        {
+            message: "Password reset successfully",
+            object: user,
+        }
+    );
+    console.log(res.statusCode, " : " , res.statusMessage, "\nPassword reset successfully\n", user)
+
+})
+
+
+module.exports = { register, login, logout, getUser, resetPassword };
 // module.exports = register ;

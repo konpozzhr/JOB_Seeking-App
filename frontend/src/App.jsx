@@ -16,6 +16,7 @@ import MyApplication from './components/Application/MyApplications';
 import NotFound from './components/NotFound/NotFound';
 import axios from 'axios';
 import { Toaster } from 'react-hot-toast';
+import Resetpassword from './components/Auth/ResetPassword';
 
 
 
@@ -46,6 +47,7 @@ const App = () =>{
         <Routes>
           <Route path="/login" element={<Login />}/>
           <Route path='/register' element={<Register />}/>
+          <Route path='/resetpassword' element={<Resetpassword />}/>
           <Route path='/' element={<Home />}/>          
           <Route path='/job/getAll' element={<Jobs />}/>
           <Route path='/job/:id' element={<JobDetails />}/>

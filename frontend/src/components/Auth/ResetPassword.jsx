@@ -9,22 +9,22 @@ import { FaPhoneFlip } from 'react-icons/fa6'
 import { RiLock2Fill } from "react-icons/ri";
 
 
-const Login = () =>{
+const Resetpassword = () =>{
 
     
 
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [newPassword, setPassword] = useState("");
     const [role, setRole] = useState("");
 
     const { isAuthorized, setIsAuthorized } = useContext(Context);
 
-    const handleLogin = async (e) =>{
+    const handleResetPwd = async (e) =>{
         e.preventDefault();
         try{
             const { data } = await axios.post(
-                "http://localhost:3004/api/v1/user/login",
-                {email, password, role},
+                "http://localhost:3004/api/v1/user/resetpassword",
+                {email, newPassword, role},
                 {
                     headers: {
                         "Content-Type" : "application/json",
@@ -52,7 +52,7 @@ const Login = () =>{
         
         return (
         <> 
-            <Navigate to={"/"} />   
+            <Navigate to={"/login"} />   
         </>
         );
     };
@@ -65,12 +65,12 @@ const Login = () =>{
                 <div className="container">
                     <div className="header">
                         <img  src="/JobZeelogo.png" alt="logo"/>
-                        <h3>Create a new account</h3>
+                        <h3>Reset Your Password</h3>
                     </div>
 
                     <form>
                         <div className="inputTag">
-                            <label>Login As</label>
+                            <label>Please provide your Info</label>
                             <div>
                                 <select value={role} onChange={(e) => setRole(e.target.value)}>
                                     <option value="">Select Role</option>
@@ -84,23 +84,21 @@ const Login = () =>{
                         <div className="inputTag">
                             <label>Email Address</label>
                             <div>
-                                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="sathya@gmail.com" />
+                                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}  />
                                 <MdOutlineMail />
                             </div>
                         </div>
 
                         <div className="inputTag">
-                            <label>Password</label>
+                            <label> New Password</label>
                             <div>
-                                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                <input type="password" value={newPassword} onChange={(e) => setPassword(e.target.value)} />
                                 <RiLock2Fill />
                             </div>
                         </div>
-                        <button onClick={handleLogin}  type="submit">Login</button>
-                        <Link to={'/register'}>Register</Link>
-                        
+                        <button onClick={handleResetPwd}  type="submit">Reset Password</button>
+                        <Link to={'/login'}>Back to Login</Link>
                     </form>
-                    <br></br><p><Link to={'/resetpassword'}>Reset Password</Link>    </p>
                 </div>
 
                 <div className="banner">
@@ -115,7 +113,7 @@ const Login = () =>{
 
 
 
-export default Login;
+export default Resetpassword;
 
 
 

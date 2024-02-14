@@ -20,6 +20,7 @@ const Navbar = () =>{
             toast.success(response.data.message);
             setIsAuthorized(false);
             navigateTo("/login");
+            // <Navigate to={"/login"} />  
 
         }catch(err){
             toast.error(err.response.message);

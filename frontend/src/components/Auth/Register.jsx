@@ -83,7 +83,7 @@ const Register = () =>{
                         </div>
 
                         <div className="inputTag">
-                            <label>Email</label>
+                            <label>Email Address</label>
                             <div>
                                 <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="sathya@gmail.com" />
                                 <MdOutlineMail />

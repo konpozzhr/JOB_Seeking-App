@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Context } from "../../main";
 import axios from "axios";
 
@@ -9,7 +9,7 @@ const JobDetails = () =>{
     const [ job, setJob] = useState({});
     const navigateTo = useNavigate();
 
-    const { isAuthorized } = useContext(Context);
+    const { isAuthorized, user } = useContext(Context);
 
     useEffect(() =>{
         axios.get(
@@ -49,9 +49,18 @@ const JobDetails = () =>{
                         <p>
                             Salary: {job.fixSalary ? (<span>{job.fixSalary}</span>):(<span>{job.salaryFrom} - {job.salaryTo}</span>)} $
                         </p>
-                        <p>Expire: <span>{job.expired}</span></p>
+                        <p>Expire: <span>False</span></p>
+                        
                         <p>Posted: <span>{job.jobPostedOn}</span></p>
                         <p>Posted By: <span>{job.postedBy}</span></p>
+                        <p>
+                            {user && user.role === "Employer" ? (
+                                <></>
+                            ) : (
+                                <Link to={`/application/${job._id}`}>Apply Now</Link>
+                            )
+                            }
+                        </p>
 
                     </div>
                 </div>

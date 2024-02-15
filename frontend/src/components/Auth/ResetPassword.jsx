@@ -102,7 +102,7 @@ const Resetpassword = () =>{
                 </div>
 
                 <div className="banner">
-                    <img src="/login.png" alt="login" />  
+                    <img src="/resetpass.png" alt="login" />  
                 </div>
             </section>
             

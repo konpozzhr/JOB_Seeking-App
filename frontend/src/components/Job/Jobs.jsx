@@ -12,23 +12,29 @@ const Jobs = () =>{
     const nvaigateTo = useNavigate();
     
     useEffect(() =>{
-        try{
-            axios.get(
-                "http://localhost:3004/api/v1/job/getAll",
-                {withCredentials: true},
-            )
-            .then((res) =>{
-                setJobs(res.data)
-            })
 
-        }catch(err){
-            console.log(err);
+        const fetchData = async () => {
+            try{
+                axios.get(
+                    "http://localhost:3004/api/v1/job/getAll",
+                    {withCredentials: true},
+                )
+                .then((res) =>{
+                    setJobs(res.data)
+                })
+            }catch(err){
+                console.log(err);
+            }
         }
+        fetchData();
     }, []);
 
-    if(!isAuthorized){
-        nvaigateTo('/login');
-    }
+
+    useEffect(() =>{
+        if(!isAuthorized){
+            nvaigateTo('/login');
+        }
+    }, [isAuthorized, nvaigateTo]);
 
     return (
         <>

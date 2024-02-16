@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../main";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Navigate, Link } from "react-router-dom";
+import { Navigate, Link, useNavigate } from "react-router-dom";
 import { FaPencilAlt, FaRegUser } from "react-icons/fa";
 import { MdOutlineMail} from 'react-icons/md';
 import { FaPhoneFlip } from 'react-icons/fa6'
@@ -18,6 +18,7 @@ const Resetpassword = () =>{
     const [role, setRole] = useState("");
 
     const { isAuthorized, setIsAuthorized } = useContext(Context);
+    const navigateTo = useNavigate();
 
     const handleResetPwd = async (e) =>{
         e.preventDefault();
@@ -37,8 +38,9 @@ const Resetpassword = () =>{
             setEmail("");
             setPassword("");
             setRole("");
-            setIsAuthorized(true);
+            // setIsAuthorized(true);
             console.log("Login successfully\n", data);
+            navigateTo('/login');
         
         }catch(err){
             toast.error(err.response.data.message);
@@ -48,14 +50,13 @@ const Resetpassword = () =>{
     }
 
     
-    if(isAuthorized){
-        
-        return (
-        <> 
-            <Navigate to={"/login"} />   
-        </>
-        );
-    };
+    // if(!isAuthorized){  
+    //     return (
+    //     <> 
+    //         <Navigate to={"/login"} />   
+    //     </>
+    //     );
+    // };
 
 
     return (

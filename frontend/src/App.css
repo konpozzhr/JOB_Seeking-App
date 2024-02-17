@@ -977,7 +977,12 @@ button{
   font-weight: 600;
   letter-spacing: 2px;
   border-radius: 10px;
+  margin-right: 80px;
 
+}
+
+.job_post .container form .clear{
+  background: rgb(206, 50, 50);
 }
 
 .job_post .container form button:hover{

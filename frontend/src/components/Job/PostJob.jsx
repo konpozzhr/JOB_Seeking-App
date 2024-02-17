@@ -20,15 +20,28 @@ const PostJob = () => {
 
     const { isAuthorized, user } = useContext(Context);
     const navigateTo = useNavigate();
+
+    const clearInput = ()=>{
+        setTitle("");
+        setDescription("");
+        setCategory("");
+        setCountry("");
+        setCity("");
+        setLocation("");
+        setSalaryType("");
+    }
     
     const handleJobPost = async (e) =>{
         e.preventDefault();
         if(salaryType === "Fixed Salary"){
-            setSalaryFrom("");
-            setSalaryTo("");
+            setFixSalary("");
+            // setSalaryFrom("");
+            // setSalaryTo("");
         }   
         else if(salaryType === "Ranged Salary"){
-            setFixSalary("");
+            // setFixSalary("");
+            setSalaryFrom("");
+            setSalaryTo("");
         }
         else {
             setSalaryFrom("");
@@ -38,7 +51,7 @@ const PostJob = () => {
 
         await axios.post(
             "http://localhost:3004/api/v1/job/post",
-            fixSalary.length >= 4 
+            fixSalary.length >= 2
             ?   { title, category, country, city, location, fixSalary, description }
             :   { title, category, country, city, location, salaryFrom, salaryTo, description },
             {
@@ -51,6 +64,8 @@ const PostJob = () => {
         .then((res) =>{
             toast.success(res.data.message);
             console.log(`POST Job Successfully\n${res}`);
+            clearInput();
+            
         })
         .catch((err) =>{
             toast.error(err.response.data.message);
@@ -80,7 +95,8 @@ const PostJob = () => {
                         <div className="wrapper">
                             <input type="text" value={title} onChange={(e) =>setTitle(e.target.value)} placeholder="Job title"/>
 
-                            <select value={category} onChange={(e) =>setCategory(e.target.selectedOptions)}>
+                            <select value={category} onChange={(e) =>{setCategory(e.target.value); console.log("Selected category:", e.target.value);}}>
+                                <option value="">Job Category</option>
                                 <option value="Web Application Dev">Web Application Dev</option>
                                 <option value="Desktop Application Dev">Desktop Application Dev</option>
                                 <option value="Front-End Development">Front-End Development</option>
@@ -96,7 +112,8 @@ const PostJob = () => {
                         </div>
                         <div className="wrapper">
                             {/* <input type="text" value={country} onChange={(e) =>setCountry(e.target.value)} placeholder="country" /> */}
-                            <select value={country} onChange={(e) =>setCountry(e.target.value)}>
+                            <select value={country} onChange={(e) =>{setCountry(e.target.value); console.log("Selected Country:", e.target.value);}}>
+                                <option value="">Country</option>
                                 <option value="Cambodia">Cambodia</option>
                                 <option value="Bangladesh">Bangladesh</option>
                                 <option value="Bhutan">Bhutan</option>
@@ -142,8 +159,12 @@ const PostJob = () => {
                         </div>
                         <textarea rows="5" value={description} onChange={(e) =>setDescription(e.target.value)} placeholder="Please Provide Job Description" />
                             
-                        <button type="submit">Post Job</button>
+                        <div>
+                            <button type="submit">Post Job</button>
+                            <button type="reset" className="clear" onClick={clearInput}>clear</button>
+                        </div>
                     </form>
+                    
                 </div>
             </div>
         </>  

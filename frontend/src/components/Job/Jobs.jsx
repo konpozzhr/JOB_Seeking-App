@@ -15,7 +15,7 @@ const Jobs = () =>{
 
         const fetchData = async () => {
             try{
-                axios.get(
+                const res = await axios.get(
                     "http://localhost:3004/api/v1/job/getAll",
                     {withCredentials: true},
                 )

@@ -46,6 +46,18 @@ const postJob = catchAsyncError(async (req, res, next) =>{
         return next(new ErrorHandler("Please provide fixed or range salary! ( only one )", 400));
     }
 
+
+    
+    // let salary;
+
+    // if (fixSalary.length >= 4) {
+    // // Use fixSalary if it has a length greater than or equal to 4
+    // salary = fixSalary;
+    // } else {
+    // // Use salaryFrom and salaryTo otherwise
+    // salary = { from: salaryFrom, to: salaryTo };
+    // }
+
     const postedBy = req.user._id;
     const job = await Job.create({
         title, 
@@ -54,6 +66,7 @@ const postJob = catchAsyncError(async (req, res, next) =>{
         country, 
         city, 
         location, 
+        // salary,
         fixSalary, 
         salaryFrom, 
         salaryTo,

@@ -78,7 +78,7 @@ const Navbar = () =>{
                                 <></>
                             )
                         }
-                        <button onClick={handleLogout}>LOGOUT</button>
+                        <button onClick={handleLogout}><img src="/logout.png" alt="" /></button>
                     </ul>
                     <div className="hamburger">
                         <GiHamburgerMenu onClick={() => setShow(!show)}/>

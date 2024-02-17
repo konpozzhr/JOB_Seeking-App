@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 import { Navigate, Link } from "react-router-dom";
 import { FaPencilAlt, FaRegUser } from "react-icons/fa";
 import { MdOutlineMail} from 'react-icons/md';
-import { FaPhoneFlip } from 'react-icons/fa6'
 import { RiLock2Fill } from "react-icons/ri";
 
 
@@ -65,7 +64,7 @@ const Login = () =>{
                 <div className="container">
                     <div className="header">
                         <img  src="/JobZeelogo.png" alt="logo"/>
-                        <h3>Create a new account</h3>
+                        <h3>Login to the System</h3>
                     </div>
 
                     <form>

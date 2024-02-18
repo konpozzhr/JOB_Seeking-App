@@ -716,7 +716,7 @@ button{
   font-weight: 400;
 }
 .jobDetail .container .banner a {
-  background-color: #2d5649;
+  background-color: green;
   color: rgb(233, 249, 255);
   font-size: 20px;
   font-weight: 400;
@@ -725,7 +725,10 @@ button{
   text-decoration: none;
   margin-top: 10px;
   width: fit-content;
+  border-radius: 10px;
 }
+
+
 @media (max-width: 1520px) {
   .jobDetail .container {
     min-width: 100%;
@@ -1037,17 +1040,24 @@ button{
   gap: 20px;
   border-bottom: 1px solid #18191c;
   padding: 10px 0;
+  background-color: rgb(214, 230, 245);
+  border-radius: 10px;
+  padding-left: 25px;
 }
 .myJobs .container .banner .card .content {
   flex: 3;
   display: flex;
   gap: 20px;
+  
 }
 .myJobs .container .banner .card .content span {
   font-size: 20px;
   margin-right: 6px;
   font-weight: bold;
+  color: rgb(15, 171, 15);
 }
+
+
 .myJobs .container .banner .card .content input,
 .myJobs .container .banner .card .content select {
   background: transparent;
@@ -1122,12 +1132,26 @@ button{
   text-transform: uppercase;
   padding: 7px;
   border: none;
-  background: #ffc107;
+  /* background: #ffc107; */
+  background: rgb(15, 180, 15);
+  border-radius: 10px;
+  /* box-shadow: 9px 0px 16px 0px rgba(0, 0, 0, 0.75); */
+
 }
 .myJobs .container .banner .card .button_wrapper .delete_btn {
   background: #d9534f;
   color: #f1f3f6;
 }
+
+.myJobs .container .banner .card .button_wrapper .edit_btn:hover{
+  background: green;
+}
+
+.myJobs .container .banner .card .button_wrapper .delete_btn:hover{
+  background: red;
+}
+
+
 .myJobs .container .banner .card .button_wrapper .check_btn {
   background: transparent;
   color: #184235;

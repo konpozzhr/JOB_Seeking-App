@@ -35,11 +35,8 @@ const PostJob = () => {
         e.preventDefault();
         if(salaryType === "Fixed Salary"){
             setFixSalary("");
-            // setSalaryFrom("");
-            // setSalaryTo("");
         }   
         else if(salaryType === "Ranged Salary"){
-            // setFixSalary("");
             setSalaryFrom("");
             setSalaryTo("");
         }
@@ -48,6 +45,12 @@ const PostJob = () => {
             setSalaryTo("");
             setFixSalary("");
         }
+
+        console.log("Data being sent to the backend:", 
+        fixSalary.length >= 2
+            ? { title, category, country, city, location, fixSalary, description }
+            : { title, category, country, city, location, salaryFrom, salaryTo, description }
+        );
 
         await axios.post(
             "http://localhost:3004/api/v1/job/post",
@@ -63,7 +66,7 @@ const PostJob = () => {
         )
         .then((res) =>{
             toast.success(res.data.message);
-            console.log(`POST Job Successfully\n${res}`);
+            console.log(`POST Job Successfully\n`);
             clearInput();
             
         })

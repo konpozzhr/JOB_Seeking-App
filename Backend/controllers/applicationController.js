@@ -50,6 +50,7 @@ const jobSeekerApplication = catchAsyncError( async (req, res, next) =>{
     res.status(200).json({
         success: true, 
         applications,
+        message: "Application submit successfully",
     });
     console.log(`${res.statusCode} : ${res.statusMessage}\n${applications} `);
     

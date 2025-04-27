@@ -26,7 +26,9 @@ cd your-repo-name
 
 ```bash
 Open the project by cmd
-frontend/
-backend/
+cd frontend/
+cd backend/
 type: npm run dev
 ```
+
+Thank you.

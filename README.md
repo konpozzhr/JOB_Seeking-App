@@ -31,4 +31,13 @@ cd backend/
 type: npm run dev
 ```
 
+### 3. Access Application
+```bash
+Open browser
+type: http://localhost:3000/
+```
+
+
+
+
 Thank you.

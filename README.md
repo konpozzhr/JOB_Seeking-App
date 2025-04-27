@@ -21,7 +21,7 @@ Make sure you have the following installed:
 git clone https://github.com/your-username/your-repo-name.git
 cd your-repo-name
 
-**### 2. Run Project**
+### 2. Run Project
 Open the project by cmd
 frontend/
 backend/
